@@ -1,10 +1,13 @@
 <?php namespace Ratiw\CommandBus;
 
+use Illuminate\Support\Facades\App;
 use InvalidArgumentException;
 
 abstract class BaseCommand
 {
-    protected $properties;
+    protected $properties = [];
+
+    protected $validator = null;
 
     function __construct($input)
     {
@@ -13,14 +16,40 @@ abstract class BaseCommand
             throw new InvalidArgumentException("Argument must be of type array.");
         }
 
-        if (is_array($input))
+        if (is_array($input) and ! is_null($this->validator))
         {
-            $this->validate($input);
+            App::make($this->validator)->validate($input);
         }
 
         $this->initializeProperties();
 
         $this->mapInputToProperties($input);
+    }
+
+
+    /**
+     * Get the validator
+     *
+     * @return null
+     */
+    public function getValidator()
+    {
+        return $this->validator;
+    }
+
+    /**
+     * Set the validator for the command
+     *
+     * @param CommandValidator $validator
+     */
+    public function setValidator($validator)
+    {
+        if ( ! $validator instanceof CommandValidator)
+        {
+            throw new InvalidArgumentException("[$validator] must be an instance of " . CommandValidator::class);
+        }
+
+        $this->validator = $validator;
     }
 
     public function __isset($name)
@@ -67,10 +96,5 @@ abstract class BaseCommand
         {
             array_key_exists($key, $this->properties) and $this->$key = $value;
         }
-    }
-
-    public function validate()
-    {
-        return true;
     }
 }
