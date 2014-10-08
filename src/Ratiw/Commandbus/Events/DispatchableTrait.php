@@ -39,6 +39,6 @@ trait DispatchableTrait
      */
     public function getDispatcher()
     {
-        return $this->dispatcher ?: App::make('Laracasts\Commander\Events\EventDispatcher');
+        return $this->dispatcher ?: App::make('Ratiw\CommandBus\Events\EventDispatcher');
     }
 }

@@ -1,8 +1,8 @@
-<?php namespace spec\CommandBus\Events;
+<?php namespace spec\Ratiw\CommandBus\Events;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use CommandBus\Events\Contracts\Dispatcher;
+use Ratiw\CommandBus\Events\Contracts\Dispatcher;
 
 class DispatchableSpec extends ObjectBehavior
 {
@@ -22,7 +22,7 @@ class DispatchableSpec extends ObjectBehavior
 }
 
 class HandlerStub {
-    use \CommandBus\Events\DispatchableTrait;
+    use \Ratiw\CommandBus\Events\DispatchableTrait;
 }
 
 class EntityStub {

@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\CommandBus;
+namespace spec\Ratiw\CommandBus;
 
-use CommandBus\CommandTranslator;
+use Ratiw\CommandBus\CommandTranslator;
 use Illuminate\Foundation\Application;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -16,7 +16,7 @@ class DefaultCommandBusSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('CommandBus\DefaultCommandBus');
+        $this->shouldHaveType('Ratiw\CommandBus\DefaultCommandBus');
     }
 
     function it_handles_a_command(Application $app, CommandStub $command, CommandTranslator $translator, CommandHandlerStub $handler)

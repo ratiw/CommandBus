@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Ratiw\\Commandbus": "src/"
+            "Ratiw\\CommandBus": "src/"
         }
     },
     "minimum-stability": "stable"
