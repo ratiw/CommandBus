@@ -1,0 +1,24 @@
+{
+    "name": "ratiw/commandbus",
+    "description": "A Laravel CommandBus feature forking from Laracasts' Commander.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rati Wannapanop",
+            "email": "rati.wannapanop@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Ratiw\\Commandbus": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
