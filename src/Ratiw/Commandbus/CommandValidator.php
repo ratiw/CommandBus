@@ -1,6 +1,7 @@
 <?php namespace Ratiw\CommandBus;
 
 use Illuminate\Validation\Factory as Validator;
+use InvalidArgumentException;
 
 abstract class CommandValidator
 {
@@ -25,5 +26,15 @@ abstract class CommandValidator
         }
 
         return true;
+    }
+
+    public function getRuleFor($name)
+    {
+        if ( ! isset($this->rules[$name]))
+        {
+            throw new InvalidArgumentException("There is no such field [$name].");
+        }
+
+        return $this->rules[$name];
     }
 }

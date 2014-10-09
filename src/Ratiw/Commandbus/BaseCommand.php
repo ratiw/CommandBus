@@ -16,7 +16,7 @@ abstract class BaseCommand
             throw new InvalidArgumentException("Argument must be of type array.");
         }
 
-        if (is_array($input) and ! is_null($this->validator))
+        if ( ! is_null($this->validator))
         {
             App::make($this->validator)->validate($input);
         }
@@ -25,7 +25,6 @@ abstract class BaseCommand
 
         $this->mapInputToProperties($input);
     }
-
 
     /**
      * Get the validator
