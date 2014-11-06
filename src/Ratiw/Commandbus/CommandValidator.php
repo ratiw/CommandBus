@@ -1,5 +1,6 @@
 <?php namespace Ratiw\CommandBus;
 
+use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Factory as Validator;
 use InvalidArgumentException;
 
@@ -9,23 +10,44 @@ abstract class CommandValidator
 
     protected $messages = [];
 
+    protected $errors;
+
     protected $validator;
 
     function __construct(Validator $validator)
     {
         $this->validator = $validator;
+        $this->errors = new MessageBag;
     }
 
     public function validate(array $input)
     {
-        $validation = $this->validator->make($input, $this->rules, $this->messages);
+        return $this->validateCollection(array($input), $this->rules, $this->messages);
+    }
 
-        if ($validation->fails())
+    public function validateCollection(array $collection, $rules, $messages = [])
+    {
+        foreach ($collection as $item)
         {
-            throw new CommandValidationException('Validation failed', $validation->errors());
+            $this->validateEach($item, $rules, $messages);
+        }
+
+        if ($this->errors->count() > 0)
+        {
+            throw new CommandValidationException('Validation failed.', $this->errors);
         }
 
         return true;
+    }
+
+    private function validateEach($item, $rules, $messages)
+    {
+        $validation = $this->validator->make($item, $rules, $messages);
+
+        if ($validation->fails())
+        {
+            $this->errors->merge($validation->errors());
+        }
     }
 
     public function getRuleFor($name)
