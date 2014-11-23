@@ -7,3 +7,5 @@ Please see original Laracasts Commander [README](https://github.com/laracasts/Co
 
 ## What's the Differences?
 -----
+
+### The Command DTO
