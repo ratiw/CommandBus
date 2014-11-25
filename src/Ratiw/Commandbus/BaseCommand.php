@@ -9,8 +9,10 @@ abstract class BaseCommand
 
     protected $validator = null;
 
-    function __construct($input)
+    function __construct($input = null)
     {
+        $input = $input ?: \Input::all();
+        
         if ( ! is_array($input))
         {
             throw new InvalidArgumentException("Argument must be of type array.");
